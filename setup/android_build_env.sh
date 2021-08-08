@@ -42,16 +42,9 @@ sudo DEBIAN_FRONTEND=noninteractive \
     maven ncftp ncurses-dev patch patchelf pkg-config pngcrush \
     pngquant python2.7 python-all-dev re2c schedtool squashfs-tools subversion \
     texinfo unzip w3m xsltproc zip zlib1g-dev lzip \
-    libxml-simple-perl apt-utils gh \
+    libxml-simple-perl apt-utils \
     ${PACKAGES} -y
 
-if [[ "$(command -v make)" ]]; then
-    makeversion="$(make -v | head -1 | awk '{print $3}')"
-    if [[ ${makeversion} != "${LATEST_MAKE_VERSION}" ]]; then
-        echo "Installing make ${LATEST_MAKE_VERSION} instead of ${makeversion}"
-        bash "$(dirname "$0")"/make.sh "${LATEST_MAKE_VERSION}"
-    fi
-fi
 
 echo "Installing repo"
 sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
